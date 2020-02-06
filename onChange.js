@@ -3,5 +3,5 @@ export function onChange(element, fn) {
 
     return () => {
         element.removeEventListener('change', fn);
-    }
+    };
 }

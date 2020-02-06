@@ -5,8 +5,65 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>lemonade-helpers – Example</title>
+    <style>
+        .button {
+            width: 100px;
+            height: 40px;
+
+            border-radius: 4px;
+            background-color: red;
+        }
+    </style>
 </head>
 <body>
-    
+    <button class="button">Click</button>
+    <input type="text" class="input__text" value="Type">
+    <script type="module">
+        import { onBlur } from "./onBlur.js";
+        import { onChange } from "./onChange.js";
+        import { onClick } from "./onClick.js";
+        import { onRAF } from "./onRAF.js";
+        
+        import { onMouseEnter } from "./onMouseEnter.js";
+        import { onMouseLeave } from "./onMouseLeave.js";
+        import { onKonami } from "./onKonami.js";
+        import { onFocus } from "./onFocus.js";
+        import { onInput } from "./onInput.js";
+        // import { onBlur } from "./onBlur.js";
+
+        let button = document.querySelector('.button');
+        let inputText = document.querySelector('.input__text');
+
+        let offMouseEnter = onMouseEnter(button, () => {
+            console.log('Button : mouseenter');
+        });
+        let offMouseLeave = onMouseLeave(button, () => {
+            console.log('Button : mouseleave');
+        });
+        let offClick = onClick(button, () => {
+            console.log('Button : click');
+        });
+
+        let offKonami = onKonami(() => {
+            alert('Konami code!');
+        });
+
+        let offBlur = onBlur(inputText, () => {
+            console.log('InputText: onBlur');
+        });
+        let offFocus = onFocus(inputText, () => {
+            console.log('InputText: onFocus');
+        });
+        let offChange = onChange(inputText, () => {
+            console.log('InputText: onChange');
+        });
+        let offInput = onInput(inputText, () => {
+            console.log('InputText: onInput');
+        });
+
+        let offRaf = onRAF(() => {
+            console.log('on requestAnimationFrame');
+        });
+    </script>
 </body>
 </html>

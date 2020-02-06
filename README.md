@@ -2,6 +2,7 @@
 
 ### noop
 ### onBlur(element, fn)
+- `element`: (HTMLElement)
 ### onChange(element, fn)
 ### onClick(element, fn)
 ### onDragDrop(element, fn)
