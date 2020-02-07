@@ -13,22 +13,67 @@
             border-radius: 4px;
             background-color: red;
         }
+
+        .swipe-zone {
+            width: 100px;
+            height: 100px;
+
+            border: 1px solid red;
+        }
     </style>
 </head>
 <body>
     <button class="button">Click</button>
     <input type="text" class="input__text" value="Type">
+    <div class="swipe-zone"></div>
+    <p class="window__size"></p>
+
+    <div class="block block--window">
+        <h2 class="block__title">Window events</h2>
+        <div class="block__event block__event--resize">
+            <input type="checkbox" checked class="event__toggle" />Resize: <span class="event__state">enabled</span>
+            <div class="event__infos"></div>
+        </div>
+    </div>
+    <div class="block block--mouse">
+        <h2 class="block__title">Mouse events</h2>
+        <div class="block__event block__event--mousemove">
+            <input type="checkbox" checked class="event__toggle" />Mousemove: <span class="event__state">enabled</span>
+            <div class="event__infos">Coordinates:</div>
+        </div>
+        <div class="block__event block__event--mousedown">
+            <input type="checkbox" checked class="event__toggle" />Mousedown: <span class="event__state">enabled</span>
+            <div class="event__infos">False</div>
+        </div>
+        <div class="block__event block__event--mouseup">
+            <input type="checkbox" checked class="event__toggle" />Mouseup: <span class="event__state">enabled</span>
+            <div class="event__infos">True</div>
+        </div>
+    </div>
     <script type="module">
         import { onBlur } from "./onBlur.js";
         import { onChange } from "./onChange.js";
         import { onClick } from "./onClick.js";
-        import { onRAF } from "./onRAF.js";
         
-        import { onMouseEnter } from "./onMouseEnter.js";
-        import { onMouseLeave } from "./onMouseLeave.js";
-        import { onKonami } from "./onKonami.js";
         import { onFocus } from "./onFocus.js";
         import { onInput } from "./onInput.js";
+        import { onKeyDown } from "./onKeyDown.js";
+        import { onKeyPress } from "./onKeyPress.js";
+        import { onKeyUp } from "./onKeyUp.js";
+        import { onKonami } from "./onKonami.js";
+        import { onMouseDown } from "./onMouseDown.js";
+        import { onMouseEnter } from "./onMouseEnter.js";
+        import { onMouseLeave } from "./onMouseLeave.js";
+        import { onMouseMove } from "./onMouseMove.js";
+        import { onMouseUp } from "./onMouseUp.js";
+        import { onPointerDown } from "./onPointerDown.js";
+        import { onPointerMove } from "./onPointerMove.js";
+        import { onPointerUp } from "./onPointerUp.js";
+        import { onRAF } from "./onRAF.js";
+        import { onSwipeHorizontal } from "./onSwipeHorizontal.js";
+        import { onSwipeVertical } from "./onSwipeVertical.js";
+        import { onWindowResize } from "./onWindowResize.js";
+        
         // import { onBlur } from "./onBlur.js";
 
         let button = document.querySelector('.button');
@@ -62,7 +107,132 @@
         });
 
         let offRaf = onRAF(() => {
-            console.log('on requestAnimationFrame');
+            // console.log('on requestAnimationFrame');
+        });
+        let offKeyDown = onKeyDown(document, (event) => {
+            // console.log('KeyDown', event.key);
+        });
+        let offKeyPress = onKeyPress(document, (event) => {
+            // console.log('KeyPress', event.key);
+        });
+
+        let offKeyUp = onKeyUp(document, (event) => {
+            // console.log('KeyUp', event.key);
+        });
+
+        let offPointerDown = onPointerDown(document, () => {
+            // console.log('onPointerDown');
+        });
+        let offPointerUp = onPointerUp(document, () => {
+            // console.log('onPointerUp');
+        });
+        let offPointerMove = onPointerMove(document, () => {
+            // console.log('onPointerMove');
+        });
+
+        let offSwipeVertical = onSwipeVertical(document.querySelector('.swipe-zone'), ({ directionY }) => {
+            console.log('Swipe vertical', { directionY });
+        });
+        let offSwipeHorizontal = onSwipeHorizontal(document.querySelector('.swipe-zone'), ({ directionX }) => {
+            console.log('onSwipeHorizontal', { directionX });
+        });
+
+        let windowSize = document.querySelector('.window__size');
+
+        /* Window events */
+        let $blockWindow = document.querySelector('.block--window');
+        let $eventWindowResize = $blockWindow.querySelector('.block__event--resize');
+        let $eventWindowResizeToggle = $eventWindowResize.querySelector('.event__toggle');
+        let $eventWindowResizeState = $eventWindowResize.querySelector('.event__state');
+        let $eventWindowInfos = $eventWindowResize.querySelector('.event__infos');
+
+        function handleResize() {
+            $eventWindowInfos.innerHTML = `Dimensions: ${window.innerWidth}x${window.innerHeight}px`;
+        }
+
+        let offWindowResize = onWindowResize(handleResize);
+        onChange($eventWindowResizeToggle, () => {
+            let checked = $eventWindowResizeToggle.checked;
+            $eventWindowResizeState.innerHTML = checked ? 'enabled' : 'disabled';
+
+            if (checked) {
+                offWindowResize = onWindowResize(handleResize);
+            } else if (offWindowResize) {
+                offWindowResize();
+                offWindowResize = null;
+            }
+        });
+        handleResize();
+
+        /* Mouse events */
+        // Mouse move
+        let $blockMouse = document.querySelector('.block--mouse');
+        let $eventMouseMove = $blockMouse.querySelector('.block__event--mousemove');
+        let $eventMouseMoveToggle = $eventMouseMove.querySelector('.event__toggle');
+        let $eventMouseMoveState = $eventMouseMove.querySelector('.event__state');
+        let $eventMouseMoveInfos = $eventMouseMove.querySelector('.event__infos');
+
+        function handleMouseMove(event) {
+             $eventMouseMoveInfos.innerHTML = `Coordinates: [${event.clientX}px , ${event.clientY}px]`;
+        }
+        let offMouseMove = onMouseMove(document, handleMouseMove);
+
+        onChange($eventMouseMoveToggle, () => {
+            let checked = $eventMouseMoveToggle.checked;
+            $eventMouseMoveState.innerHTML = checked ? 'enabled' : 'disabled';
+
+            if (checked) {
+                offMouseMove = onMouseMove(document, handleMouseMove);
+            } else if (offMouseMove) {
+                offMouseMove();
+                offMouseMove = null;
+            }
+        });
+
+        // mousedown
+        let $eventMouseDown = $blockMouse.querySelector('.block__event--mousedown');
+        let $eventMouseDownToggle = $eventMouseDown.querySelector('.event__toggle');
+        let $eventMouseDownState = $eventMouseDown.querySelector('.event__state');
+        let $eventMouseDownInfos = $eventMouseDown.querySelector('.event__infos');
+        let $eventMouseUp = $blockMouse.querySelector('.block__event--mouseup');
+        let $eventMouseUpToggle = $eventMouseUp.querySelector('.event__toggle');
+        let $eventMouseUpState = $eventMouseUp.querySelector('.event__state');
+        let $eventMouseUpInfos = $eventMouseUp.querySelector('.event__infos');
+
+        function handleMouseDown(event) {
+            $eventMouseDownInfos.innerHTML = 'True';
+            $eventMouseUpInfos.innerHTML = 'False';
+        }
+        let offMouseDown = onMouseDown(document, handleMouseDown);
+
+        onChange($eventMouseDownToggle, () => {
+            let checked = $eventMouseDownToggle.checked;
+            $eventMouseDownState.innerHTML = checked ? 'enabled' : 'disabled';
+
+            if (checked) {
+                offMouseDown = onMouseDown(document, handleMouseDown);
+            } else if (offMouseDown) {
+                offMouseDown();
+                offMouseDown = null;
+            }
+        });
+
+        function handleMouseUp(event) {
+            $eventMouseDownInfos.innerHTML = 'False';
+            $eventMouseUpInfos.innerHTML = 'True';
+        }
+        let offMouseUp = onMouseUp(document, handleMouseUp);
+
+        onChange($eventMouseUpToggle, () => {
+            let checked = $eventMouseUpToggle.checked;
+            $eventMouseUpState.innerHTML = checked ? 'enabled' : 'disabled';
+
+            if (checked) {
+                offMouseUp = onMouseUp(document, handleMouseUp);
+            } else if (offMouseUp) {
+                offMouseUp();
+                offMouseUp = null;
+            }
         });
     </script>
 </body>

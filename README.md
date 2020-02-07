@@ -1,6 +1,9 @@
 # lemonade-helpers
 
-### noop
+### noop()
+Empty function
+### now()
+Return performance.now if available, Date.now otherwise
 ### onBlur(element, fn)
 - `element`: (HTMLElement)
 - `fn`: (Function)
@@ -25,6 +28,9 @@ Return a function to destroy the listener.
 - `element`: (HTMLElement)
 - `fn`: (Function)
 Return a function to destroy the listener.
+### onKeyPress(element, fn)
+- `element`: (HTMLElement)
+- `fn`: (Function)
 ### onKeyUp(element, fn)
 - `element`: (HTMLElement)
 - `fn`: (Function)
