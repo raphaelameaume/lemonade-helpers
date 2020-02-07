@@ -2,14 +2,12 @@ import { onTouchStart } from "./onTouchStart.js";
 import { onTouchMove } from "./onTouchMove.js";
 import { onTouchEnd } from "./onTouchEnd.js";
 
-export function onSwipe(element, fn) {
+export function onSwipeHorizontal(element, fn) {
     let startX = -1;
-    let startY = -1;
     let enabled = true;
 
     function handleStart(event) {
         startX = event.touches[0].clientX;
-        startY = event.touches[0].clientY;
     }
 
     function handleEnd(event) {
@@ -17,11 +15,9 @@ export function onSwipe(element, fn) {
     }
 
     function handleMove(event) {
-        if ((startX < 0 || startY < 0)) return;
+        if (startX < 0) return;
 
         let moveX = event.touches[0].clientX;
-        let moveY = event.touches[0].clientX;
-
         let deltaX = moveX - startX;
 
         if (enabled) {

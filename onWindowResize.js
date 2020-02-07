@@ -7,7 +7,7 @@ window.addEventListener('resize', () => {
     }
 });
 
-export function onWindowResize(fn, fire = false) {
+export function onWindowResize(fn, { fire = false } = {}) {
     let index = COUNT++;
 
     fns.push({ index, fn });
@@ -22,6 +22,6 @@ export function onWindowResize(fn, fire = false) {
                 break;
             }
         }
-        fns.splice(i, index);
+        fns.splice(idx, 1);
     };
 }
