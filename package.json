@@ -1,0 +1,16 @@
+{
+  "name": "lemonade-helpers",
+  "version": "0.1.0",
+  "description": "Utility functions",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/raphaelameaume/lemonade-helpers.git"
+  },
+  "author": "Raphaël Améaume",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/raphaelameaume/lemonade-helpers/issues"
+  },
+  "homepage": "https://github.com/raphaelameaume/lemonade-helpers#readme"
+}
