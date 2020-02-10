@@ -1,7 +1,7 @@
 {
   "name": "lemonade-helpers",
   "version": "0.1.0",
-  "description": "Utility functions",
+  "description": "Utility functions for browser and dom events",
   "main": "index.js",
   "repository": {
     "type": "git",

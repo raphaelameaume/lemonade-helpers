@@ -1,5 +1,7 @@
 # lemonade-helpers
 
+Utility functions for browser and dom events
+
 ### noop()
 Empty function
 
