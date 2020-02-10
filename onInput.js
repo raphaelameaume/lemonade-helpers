@@ -1,7 +1,7 @@
-export function onInput(element, fn) {
-    element.addEventListener('input', fn);
+export function onInput(element, fn, options = {}) {
+    element.addEventListener('input', fn, options);
 
     return () => {
-        element.removeEventListener('input', fn);
+        element.removeEventListener('input', fn, options);
     }
 }

@@ -18,7 +18,11 @@ function loop() {
     }
 }
 
-export function onRAF(fn) {
+export function onRAF(fn, { fire = false } = {}) {
+    if (fire) {
+        fn();
+    }
+
     if (fns.length === 0) {
         time = now();
         lastTime = time;

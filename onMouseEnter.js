@@ -1,7 +1,7 @@
-export function onMouseEnter(element, fn) {
-    element.addEventListener('mouseenter', fn);
+export function onMouseEnter(element, fn, options = {}) {
+    element.addEventListener('mouseenter', fn, options);
 
     return () => {
-        element.removeEventListener('mouseenter', fn);
+        element.removeEventListener('mouseenter', fn, options);
     };
 }

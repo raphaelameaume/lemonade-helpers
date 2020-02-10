@@ -18,31 +18,31 @@ Attach a `change` listener to `element`. Return a function to detach the listene
 ### offClick = onClick(element, fn, [options])
 Attach a `click` listener to `element`. Return a function to detach the listener.
 
-### offMouseDown = onMouseDown(element, fn)
+### offMouseDown = onMouseDown(element, fn, [options])
 Attach a `mousedown` listener to `element`. Return a function to detach the listener.
 
-### offMouseMove = onMouseMove(element, fn)
+### offMouseMove = onMouseMove(element, fn, [options])
 Attach a `mousemove` listener to `element`. Return a function to detach the listener.
 
-### offMouseEnter = onMouseEnter(element, fn)
+### offMouseEnter = onMouseEnter(element, fn, [options])
 Attach a `mouseenter` listener to `element`. Return a function to detach the listener.
 
-### onTouchStart(element, fn)
+### onTouchStart(element, fn, [options])
 Attach a `touchstart` listener to `element`. Return a function to detach the listener.
 
-### onTouchMove(element, fn)
+### onTouchMove(element, fn, [options])
 Attach a `touchmove` listener to `element`. Return a function to detach the listener.
 
-### onTouchEnd(element, fn)
+### onTouchEnd(element, fn, [options])
 Attach a `touchend` listener to `element`. Return a function to detach the listener.
 
-### offPointerDown = onPointerDown(element, fn)
+### offPointerDown = onPointerDown(element, fn, [options])
 Attach `mousedown` and `touchstart` listeners to `element`. Return a function to detach the listeners.
 
-### onPointerMove(element, fn)
+### onPointerMove(element, fn, [options])
 Attach `mousemove` and `touchmove` listeners to `element`. Return a function to detach the listeners.
 
-### onPointerUp(element, fn)
+### onPointerUp(element, fn, [options])
 Attach `mouseup` and `touchend` listeners to `element`. Return a function to detach the listeners.
 
 ### offKeyDown = onKeyDown([element], fn, [options])
@@ -57,11 +57,14 @@ Return a function to detach the listener.
 Attach a `keyup` listener to `element`. If only a function is provided, the listener will be attached to `document`.
 Return a function to detach the listener.
 
-### offRaf = onRAF(fn)
-Subscribe `fn` on `requestAnimationFrame`. Return a function to cancel the subscription.
+### offRaf = onRAF(fn, [options])
+Subscribe `fn` on `requestAnimationFrame`.
+Set `options.fire` to `true` to trigger `fn` before waiting for the next frame.
+Return a function to cancel the subscription.
 
 ### offWindowResize = onWindowResize(fn)
 Attach a `resize` listener to `window` if non-existent.
+Set `options.fire` to `true` to trigger `fn` before waiting for the next resize.
 Subscribe `fn` on window resize. Return a function to cancel the subscription.
 
 ### offSwipeHorizontal = onSwipeHorizontal(element, fn, [options]) (Touch-only)
@@ -86,7 +89,7 @@ Avoid event.preventDefault is the event was triggered while `CMD`, `Alt`, `Shift
 Useful to prevent click on links while keeping the default behaviour (opening in a new tab) if a key is pressed simultaneously.
 
 ### style(element, property, value)
-Shorthand for `element.style[property] = value`. Improve readability while styling different elements at the same time.
+Shorthand for `element.style[property] = value`. I found it to improve readability while styling multiple elements at the same time.
 
 ### styles(element, props)
 Assign multiple property/value pairs at the same time.

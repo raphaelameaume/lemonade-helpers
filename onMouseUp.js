@@ -1,7 +1,7 @@
-export function onMouseUp(element, fn) {
-    element.addEventListener('mouseup', fn);
+export function onMouseUp(element, fn, options = {}) {
+    element.addEventListener('mouseup', fn, options);
 
     return () => {
-        element.removeEventListener('mouseup', fn);
+        element.removeEventListener('mouseup', fn, options);
     };
 }

@@ -1,12 +1,12 @@
-export function onKeyDown(element, fn) {
+export function onKeyDown(element, fn, options = {}) {
     if (typeof element === 'function') {
         fn = element;
         element = document;
     }
-    
-    element.addEventListener('keydown', fn);
+
+    element.addEventListener('keydown', fn, options);
 
     return () => {
-        element.removeEventListener('keydown', fn);
+        element.removeEventListener('keydown', fn, options);
     };
 }

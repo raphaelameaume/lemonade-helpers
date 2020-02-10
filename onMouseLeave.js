@@ -1,7 +1,7 @@
-export function onMouseLeave(element, fn) {
-    element.addEventListener('mouseleave', fn);
+export function onMouseLeave(element, fn, options = {}) {
+    element.addEventListener('mouseleave', fn, options);
 
     return () => {
-        element.removeEventListener('mouseleave', fn);
+        element.removeEventListener('mouseleave', fn, options);
     };
 }

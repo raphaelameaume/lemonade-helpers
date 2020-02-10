@@ -1,7 +1,7 @@
-export function onMouseMove(element, fn) {
-    element.addEventListener('mousemove', fn);
+export function onMouseMove(element, fn, options = {}) {
+    element.addEventListener('mousemove', fn, options);
 
     return () => {
-        element.removeEventListener('mousemove', fn);
+        element.removeEventListener('mousemove', fn, options);
     };
 }

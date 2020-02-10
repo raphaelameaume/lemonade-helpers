@@ -1,7 +1,7 @@
-export function onFocus(element, fn) {
-    element.addEventListener('focus', fn);
+export function onFocus(element, fn, options = {}) {
+    element.addEventListener('focus', fn, options);
 
     return () => {
-        element.removeEventListener('focus', fn);
+        element.removeEventListener('focus', fn, options);
     }
 }
