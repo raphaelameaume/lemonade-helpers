@@ -1,7 +1,7 @@
-export function onClick(element, fn) {
-    element.addEventListener('click', fn);
+export function onClick(element, fn, options = {}) {
+    element.addEventListener('click', fn, options);
 
     return () => {
-        element.removeEventListener('click', fn);
+        element.removeEventListener('click', fn, options);
     }
 }

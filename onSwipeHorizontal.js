@@ -2,7 +2,7 @@ import { onTouchStart } from "./onTouchStart.js";
 import { onTouchMove } from "./onTouchMove.js";
 import { onTouchEnd } from "./onTouchEnd.js";
 
-export function onSwipeHorizontal(element, fn) {
+export function onSwipeHorizontal(element, fn, { delta } = {}) {
     let startX = -1;
     let enabled = true;
 
@@ -21,10 +21,10 @@ export function onSwipeHorizontal(element, fn) {
         let deltaX = moveX - startX;
 
         if (enabled) {
-            if (deltaX > 30) {
+            if (deltaX > delta) {
                 fn({ directionX: -1, directionY: 0 }); // left
                 enabled = false;
-            } else if (deltaX < -30) {
+            } else if (deltaX < -delta) {
                 fn({ directionX: 1, directionY: 0 }); // right
                 enabled = false;
             }

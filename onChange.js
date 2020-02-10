@@ -1,7 +1,7 @@
-export function onChange(element, fn, {} = {}) {
-    element.addEventListener('change', fn);
+export function onChange(element, fn, options = {}) {
+    element.addEventListener('change', fn, options);
 
     return () => {
-        element.removeEventListener('change', fn);
+        element.removeEventListener('change', fn, options);
     };
 }
