@@ -129,3 +129,7 @@ styles(element, {
     opacity, 
 })
 ```
+
+## License
+
+MIT License, see [LICENSE](https://github.com/raphaelameaume/lemonade-helpers/tree/master/LICENSE) for details
