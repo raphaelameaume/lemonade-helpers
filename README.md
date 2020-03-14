@@ -2,6 +2,34 @@
 
 Utility functions for browser and dom events
 
+## Installation
+
+`npm install lemonade-helpers`
+
+## Usage
+
+```js
+import { onClick } from "lemonade-helpers";
+
+let offClick;
+
+function init() {
+    let button = document.querySelector('button');
+
+    // add 'click' event listener on button
+    offClick = onClick(button, () => {
+        console.log('click');
+    });
+}
+
+function destroy() {
+    // remove 'click' event listener on button
+    offClick();
+}
+```
+
+## Functions
+
 ### noop()
 Empty function
 
