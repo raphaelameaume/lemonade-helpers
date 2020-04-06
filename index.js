@@ -1,4 +1,5 @@
 export { noop } from "./noop.js";
+export { now } from "./now.js";
 export { onBlur } from "./onBlur.js";
 export { onChange } from "./onChange.js";
 export { onClick } from "./onClick.js";
