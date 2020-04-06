@@ -2,6 +2,8 @@ import { onPointerDown } from "./onPointerDown.js";
 import { onPointerMove } from "./onPointerMove.js";
 import { onPointerUp } from "./onPointerUp.js";
 import { onMouseLeave } from "./onMouseLeave.js";
+import { onClick } from "./onClick.js";
+import { now } from "./now.js";
 
 export function onDragDrop(element, fn, { outsideElement = document } = {}) {
     let dragged = false;
@@ -13,6 +15,7 @@ export function onDragDrop(element, fn, { outsideElement = document } = {}) {
     let currentY = 0;
     let deltaX = 0;
     let deltaY = 0;
+    let startTime = 0;
 
     let offPointerMove = onPointerMove(outsideElement, (moveEvent) => {
         moveEvent.preventDefault();
@@ -37,16 +40,26 @@ export function onDragDrop(element, fn, { outsideElement = document } = {}) {
 
         startX = isTouchDown ? downEvent.touches[0].clientX : downEvent.clientX;
         startY = isTouchDown ? downEvent.touches[0].clientY : downEvent.clientY;
+        startTime = now();
 
         currentX = startX;
         currentY = startY;
 
         deltaX = 0;
         deltaY = 0;
-        
+
         dragging = true;
 
         trigger();
+    });
+
+    let offClick = onClick(element, (event) => {
+        let deltaTime = now() - startTime;
+
+        if (deltaTime > 150) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
     });
 
     let offMouseLeave = onMouseLeave(element, (event) => {
@@ -55,10 +68,12 @@ export function onDragDrop(element, fn, { outsideElement = document } = {}) {
         trigger();
     });
 
-    let offPointerUp = onPointerUp(outsideElement, () => {
-        dragging = false;
+    let offPointerUp = onPointerUp(outsideElement, (event) => {
+        if (dragging) {
+            dragging = false;
 
-        trigger();
+            trigger();
+        }
     })
 
     function trigger() {
@@ -77,5 +92,8 @@ export function onDragDrop(element, fn, { outsideElement = document } = {}) {
 
         offMouseLeave();
         offMouseLeave = null;
+
+        offClick();
+        offClick = null;
     };
 }
