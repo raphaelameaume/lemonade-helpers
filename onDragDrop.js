@@ -18,9 +18,9 @@ export function onDragDrop(element, fn, { outsideElement = document } = {}) {
     let startTime = 0;
 
     let offPointerMove = onPointerMove(outsideElement, (moveEvent) => {
-        moveEvent.preventDefault();
-
         if (!dragging) return;
+
+        moveEvent.preventDefault();
 
         const isTouchMove = moveEvent.touches && moveEvent.touches.length > 0;
 
@@ -33,7 +33,7 @@ export function onDragDrop(element, fn, { outsideElement = document } = {}) {
         deltaY = currentY - startY;
 
         trigger();
-    }, { passive: false });
+    }, { passive: true });
 
     let offPointerDown = onPointerDown(element, (downEvent) => {
         const isTouchDown = downEvent.touches && downEvent.touches.length > 0;
