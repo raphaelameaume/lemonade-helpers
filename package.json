@@ -1,6 +1,6 @@
 {
   "name": "lemonade-helpers",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Utility functions for browser and dom events",
   "main": "index.js",
   "repository": {
