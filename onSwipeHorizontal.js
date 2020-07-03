@@ -46,6 +46,5 @@ export function onSwipeHorizontal(element, fn, { delta } = {}) {
         offTouchEnd = null;
 
         startX = null;
-        startY = null;
     };
 }
